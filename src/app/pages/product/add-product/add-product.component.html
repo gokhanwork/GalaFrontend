@@ -1,0 +1,58 @@
+<div class="card mb-5 mb-xl-10">
+  <div class="card-header border-0 cursor-pointer"
+    role="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#fh_product_add"
+    aria-expanded="true"
+    aria-controls="fh_product_add">
+    <div class="card-title m-0">
+      <h3 class="fw-bolder m-0">Ürün Ekle</h3>
+    </div>
+  </div>
+  <div id="fh_product_add" class="collapse show">
+    <form class="form">
+      <div class="card-body border-top p-9">
+        <div class="row mb-6">
+
+          <div class="col-lg-4 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6"
+            >Ürün Adı</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
+              placeholder="Ürün Adı..."
+              formControlName="name"
+              id="name"
+            />
+          </div>
+          <div class="col-lg-4 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6"
+            >Stok Kodu</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
+              placeholder="Stok kodu..."
+              formControlName="code"
+              id="code"
+            />
+          </div>
+          <div class="col-lg-4 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6">Miktar Birimi</label>
+            <select
+              name="umitId"
+              class="form-select form-select-lg form-select-solid"
+              formControlName="unitId"
+            >
+              <option value="1">S Corporation</option>
+              <option value="1">C Corporation</option>
+              <option value="2">Sole Proprietorship</option>
+              <option value="3">Non-profit</option>
+              <option value="4">Limited Liability</option>
+              <option value="5">General Partnership</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

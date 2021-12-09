@@ -1,0 +1,33 @@
+<!-- begin::Row -->
+<ng-container *ngIf="isLoading$ | async">
+  <span class="indicator-progress" [style.display]="'block'">
+    Yükleniyor...
+    <span
+      class="spinner-border spinner-border-sm align-center ms-2"
+    ></span>
+  </span>
+</ng-container>
+<div class="row g-5 g-xl-8">
+  <div *ngFor="let table of tables" class="col-xl-2">
+    <app-stats-widget5
+      *ngIf="table.tableStatus == true"
+      svgIcon="./assets/media/icons/duotune/graphs/gra007.svg"
+      class="card bg-success hoverable card-xl-stretch mb-5 mb-xl-8"
+      color="success"
+      iconColor="white"
+      title="{{ table.tableName }}"
+      description="Akfif"
+    ></app-stats-widget5>
+    <app-stats-widget5
+      *ngIf="table.tableStatus == false"
+      svgIcon="./assets/media/icons/duotune/graphs/gra007.svg"
+      class="card bg-danger hoverable card-xl-stretch mb-5 mb-xl-8"
+      color="info"
+      iconColor="white"
+      title="{{ table.tableName }}"
+      description="Pasif"
+    ></app-stats-widget5>
+
+  </div>
+</div>
+<!-- end::Row -->

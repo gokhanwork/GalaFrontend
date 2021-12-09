@@ -1,0 +1,43 @@
+<ng-container *ngIf="isLoading$ | async">
+  <span class="indicator-progress" [style.display]="'block'">
+    Yükleniyor...
+    <span
+      class="spinner-border spinner-border-sm align-center ms-2"
+    ></span>
+  </span>
+</ng-container>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th>Ürün ID</th>
+      <th>Stok Kodu</th>
+      <th>Ürün Adı</th>
+      <th>Fiyatı</th>
+      <th>Miktarı</th>
+      <th>
+        İşlem
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.productId }}</td>
+      <td>{{ product.code }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>
+
+        <a href="" class="btn btn-sm btn-clean btn-icon" title="Görüntüle">
+        	<i class="la la-eye"></i>
+        </a>
+        <a href="" class="btn btn-sm btn-clean btn-icon" title="Düzenle">
+          <i class="la la-edit"></i>
+        </a>
+        <a href="" class="btn btn-sm btn-clean btn-icon" title="Sil">
+          <i class="la la-trash"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
