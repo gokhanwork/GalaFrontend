@@ -40,7 +40,7 @@ export class AddTableComponent implements OnInit {
       this.tableService.addTable(tableModel).subscribe(
         (response) => {
           this.isLoading$.next(false)
-          this.toastrService.success(response.message,"Başarılı")
+          this.toastrService.success(response.messages[0],"Başarılı")
 
         },
         (responseError) => {
@@ -51,7 +51,9 @@ export class AddTableComponent implements OnInit {
             }
           }*/
           this.isLoading$.next(false);
-          this.toastrService.error(responseError.error.message,"Hata");
+          console.log(responseError.error.exception);
+
+          this.toastrService.error(responseError.error.exception,"Hata");
         }
       );
 

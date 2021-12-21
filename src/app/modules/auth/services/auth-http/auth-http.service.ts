@@ -1,3 +1,5 @@
+import { TokenModel } from './../../../../models/tokenModel';
+import { Result } from './../../../../models/Result';
 import { ListResponseModel } from './../../../../models/listResponseModel';
 import { SingleResponseModel } from './../../../singleResponse.model';
 import { LoginModel } from './../../models/login.model';
@@ -9,7 +11,7 @@ import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../models/auth.model';
 import { UserType } from '../auth.service';
 
-const API_USERS_URL = `${environment.apiUrl}/auth`;
+const API_USERS_URL = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +20,14 @@ export class AuthHTTPService {
   constructor(private http: HttpClient) {}
 
   // public methods
-  login(loginModel:LoginModel):Observable<any> {
-    return this.http.post<SingleResponseModel<AuthModel>>(`${API_USERS_URL}/login`, loginModel);
+  public login(loginModel:LoginModel) : Observable<any> {
+    const headerDict = {
+      "tenant": "root"
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    return this.http.post(`${API_USERS_URL}tokens`, loginModel,requestOptions);
   }
 
   // CREATE =>  POST: add a new user to the server
@@ -34,7 +42,7 @@ export class AuthHTTPService {
     });
   }
 
-  getUserByToken(id: number,token: string): Observable<ListResponseModel<UserModel>> {
-    return this.http.get<ListResponseModel<UserModel>>(`${environment.apiUrl}/User/me?id=`+id);
+  getUserByToken(token: string): Observable<Result<UserModel>> {
+    return this.http.get<Result<UserModel>>(`${environment.apiUrl}identity/profile`);
   }
 }

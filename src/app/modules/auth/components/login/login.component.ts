@@ -2,7 +2,7 @@ import { LoginModel } from './../../models/login.model';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { first, filter } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,8 +16,8 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit, OnDestroy {
   // KeenThemes mock, change it to:
   defaultAuth: any = {
-    email: 'gokhan@gokhan.work',
-    password: '123456',
+    email: 'admin@root.com',
+    password: '123Pa$$word!',
   };
   loginForm: FormGroup;
   hasError: boolean;
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     let loginModel:LoginModel = Object.assign({}, this.loginForm.value);
     const loginSubscr = this.authService
       .login(loginModel)
-      .pipe(first())
+      .pipe(filter(result => result?.succeeded === true))
       .subscribe((response) => {
         if (response) {
           console.log(response)

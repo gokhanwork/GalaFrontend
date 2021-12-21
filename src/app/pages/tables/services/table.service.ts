@@ -1,3 +1,4 @@
+import { Result } from './../../../models/Result';
 import { ListResponseModel } from 'src/app/models/listResponseModel';
 import { TableModel } from 'src/app/models/tableModel';
 import { TableHttpService } from './table-http.service';
@@ -19,10 +20,10 @@ export class TableService implements OnDestroy {
     this.isLoading$ = this.isLoadingSubject.asObservable();
    }
 
-  getTables():Observable<ListResponseModel<TableModel>> {
+  getTables():Observable<Result<TableModel[]>> {
     this.isLoadingSubject.next(true);
     return this.tableHttpService.getTables().pipe(
-      map((data: ListResponseModel<TableModel>) => {
+      map((data: Result<TableModel[]>) => {
         console.log(data);
         return data;
       }),

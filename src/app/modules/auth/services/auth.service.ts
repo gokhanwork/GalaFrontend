@@ -1,8 +1,10 @@
+import { TokenModel } from './../../../models/tokenModel';
+import { Result } from './../../../models/Result';
 import { ListResponseModel } from './../../../models/listResponseModel';
 import { LoginModel } from './../models/login.model';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
@@ -10,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SingleResponseModel } from '../../singleResponse.model';
 import { ToastrService } from 'ngx-toastr';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 export type UserType = UserModel | undefined;
 
@@ -49,11 +52,15 @@ export class AuthService implements OnDestroy {
   }
 
   // public methods
-  login(loginModel:LoginModel):Observable<ListResponseModel<UserType>> {
+  login(loginModel:LoginModel):Observable<Result<UserType>> {
+    loginModel.tenant="root";
     this.isLoadingSubject.next(true);
-    return this.authHttpService.login(loginModel).pipe(
-      map((auth: SingleResponseModel<AuthModel>) => {
-        const result = this.setAuthFromLocalStorage(auth.data);
+    return this.authHttpService.login(loginModel)
+    .pipe(
+      map((result: Result<TokenModel>) => {
+        if(result?.succeeded === true){
+          this.setAuthFromLocalStorage(result.data);
+        }
         return result;
       }),
       switchMap(() => this.getUserByToken()),
@@ -72,17 +79,17 @@ export class AuthService implements OnDestroy {
     });
   }
 
-  getUserByToken(): Observable<ListResponseModel<UserType>> {
+  getUserByToken(): Observable<Result<UserType>> {
     const auth = this.getAuthFromLocalStorage();
     if (!auth || !auth.token) {
       return of(undefined!);
     }
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.userId,auth.token).pipe(
-      map((user: ListResponseModel<UserModel>) => {
+    return this.authHttpService.getUserByToken(auth.token).pipe(
+      map((user: Result<UserModel>) => {
         if (user) {
-          this.currentUserSubject.next(user.data[0]);
+          this.currentUserSubject.next(user.data);
         } else {
           this.logout();
         }
@@ -116,7 +123,7 @@ export class AuthService implements OnDestroy {
   }
 
   // private methods
-  private setAuthFromLocalStorage(auth: AuthModel): boolean {
+  private setAuthFromLocalStorage(auth: TokenModel): boolean {
     // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
 
     if (auth && auth.token) {

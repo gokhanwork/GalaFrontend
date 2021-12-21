@@ -1,3 +1,4 @@
+import { Result } from './../../models/Result';
 import { TableHttpService } from './services/table-http.service';
 import { Component, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { Toast } from 'bootstrap';
@@ -13,7 +14,7 @@ import { TableService } from './services/table.service';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  tables:TableModel[] = [];
+  tables:TableModel[];
   private unsubscribe: Subscription[] = [];
   dataLoaded = false;
   isLoading$: Observable<boolean>;
@@ -64,7 +65,7 @@ export class TablesComponent implements OnInit {
       .getTables()
       .pipe(first())
       .subscribe((response) => {
-        if (response) {
+        if (response.succeeded) {
           console.log(response.data)
           this.tables = response.data;
         } else {

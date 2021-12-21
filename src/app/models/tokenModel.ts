@@ -1,4 +1,5 @@
-export interface TokenModel{
-  token:string;
-  expiration:string;
+export class TokenModel{
+  token: string;
+  refreshToken: string;
+  refreshTokenExpiryTime: Date;
 }
