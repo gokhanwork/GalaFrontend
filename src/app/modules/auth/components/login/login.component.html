@@ -24,13 +24,18 @@
   <!-- begin::Alert info-->
   <ng-container *ngIf="!hasError">
     <div class="mb-10 bg-light-info p-8 rounded">
-      <div class="text-info">
-        Use account <strong>{{ defaultAuth.email }}</strong> and password
-        <strong>{{ defaultAuth.password }}</strong> to continue.
+      <div *ngIf="!isSelectTenant" class="text-info">
+        Giriş yapmadan önce şirket bilgilerinizi girmeniz,
+        gerekmektedir. <strong (click)="openDialog()">Buraya</strong> tıklayarak şirket isminizi giriniz.
+      </div>
+      <div *ngIf="isSelectTenant" class="text-info">
+        Selam, <span [innerHtml]="tenant"></span>.
+        Farklı bir firma seçmek için<strong (click)="openDialog()"> buraya</strong> tıklayınız.
       </div>
     </div>
   </ng-container>
   <!-- end::Alert info-->
+
 
   <!-- begin::Alert error-->
   <ng-container *ngIf="hasError">

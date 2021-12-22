@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Firma Bilgisi</h1>
+<div mat-dialog-content>
+  <mat-form-field class="w-100">
+    <mat-label>Şirket Kullanıcı Adı</mat-label>
+    <input class="form-control form-control-lg form-control-solid"
+     [(ngModel)]="data.tenant"
+     placeholder="örn. Resital">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-sm btn-primary w-100 mb-5" mat-button [mat-dialog-close]="data.tenant" cdkFocusInitial>Kaydet</button>
+</div>

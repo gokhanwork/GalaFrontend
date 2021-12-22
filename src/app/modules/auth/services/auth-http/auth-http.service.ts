@@ -10,6 +10,7 @@ import { UserModel } from '../../models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../models/auth.model';
 import { UserType } from '../auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 const API_USERS_URL = `${environment.apiUrl}`;
 
@@ -17,13 +18,17 @@ const API_USERS_URL = `${environment.apiUrl}`;
   providedIn: 'root',
 })
 export class AuthHTTPService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private cookieService:CookieService) {}
 
   // public methods
   public login(loginModel:LoginModel) : Observable<any> {
+    const tenant = this.cookieService.get("tenant");
     const headerDict = {
-      "tenant": "root"
+      "tenant": tenant
     }
+    console.log("Tenant",tenant);
+
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };

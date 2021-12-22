@@ -25,6 +25,8 @@ import { StatsWidget5Component } from './_metronic/partials/content/widgets/stat
 import { DataTablesModule } from 'angular-datatables';
 import { ProductComponent } from './pages/product/product.component';
 import { AddProductComponent } from './pages/product/add-product/add-product.component';
+import { DialogModule } from './_metronic/partials/content/dialog/dialog.module';
+import { CookieService } from 'ngx-cookie-service';
 // #fake-end#
 const authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 function appInitializer(authService: AuthService) {
@@ -49,6 +51,7 @@ export function tokenGetter() {
     HttpClientModule,
     ClipboardModule,
     WidgetsModule,
+    DialogModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),
@@ -80,7 +83,8 @@ export function tokenGetter() {
       deps: [AuthService],
     },
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
-    StroageTool
+    StroageTool,
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })

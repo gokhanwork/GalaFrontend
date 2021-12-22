@@ -53,7 +53,7 @@ export class AuthService implements OnDestroy {
 
   // public methods
   login(loginModel:LoginModel):Observable<Result<UserType>> {
-    loginModel.tenant="root";
+    //loginModel.tenant="GokhanWork";
     this.isLoadingSubject.next(true);
     return this.authHttpService.login(loginModel)
     .pipe(

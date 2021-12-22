@@ -7,6 +7,10 @@ import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {MatDialog} from '@angular/material/dialog';
+import { TenantDialogComponent } from 'src/app/_metronic/partials/content/dialog/tenant-dialog/tenant-dialog.component';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-login',
@@ -23,16 +27,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   hasError: boolean;
   returnUrl: string;
   isLoading$: Observable<boolean>;
+  isSelectTenant: boolean = false;
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
-
+  tenant: string;
+  date: Date;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private dialog: MatDialog,
+    private cookieService: CookieService,
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -43,14 +51,39 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.checkTenant();
     // get return url from route parameters or default to '/'
     this.returnUrl =
       this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TenantDialogComponent, {
+      width: '400px',
+      data: {tenant: this.tenant},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.date = new Date();
+      this.date.setDate( this.date.getDate() + 999 );
+      this.tenant = result;
+      this.cookieService.set("tenant",result,this.date,"/");
+      this.isSelectTenant = true;
+
+    });
+  }
+
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
+  }
+  checkTenant(){
+    this.tenant = this.cookieService.get("tenant");
+    if(this.tenant){
+      this.isSelectTenant = true;
+    }else{
+      this.isSelectTenant = false;
+    }
   }
 
   initForm() {
@@ -98,3 +131,4 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }
+
