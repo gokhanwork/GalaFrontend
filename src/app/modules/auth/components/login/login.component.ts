@@ -1,7 +1,7 @@
 import { LoginModel } from './../../models/login.model';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { first, filter } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
@@ -23,16 +23,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     email: 'admin@root.com',
     password: '123Pa$$word!',
   };
+  tenant: string;
+  date: Date;
   loginForm: FormGroup;
   hasError: boolean;
   returnUrl: string;
   isLoading$: Observable<boolean>;
-  isSelectTenant: boolean = false;
+  isSelectTenant$: Observable<boolean>;
+  isSelectTenantSubject: BehaviorSubject<boolean>;
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
-  tenant: string;
-  date: Date;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -43,6 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
   ) {
     this.isLoading$ = this.authService.isLoading$;
+    this.isSelectTenantSubject = new BehaviorSubject<boolean>(false);
+    this.isSelectTenant$ = this.isSelectTenantSubject.asObservable();
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
       this.router.navigate(['/']);
@@ -64,12 +67,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.date = new Date();
-      this.date.setDate( this.date.getDate() + 999 );
-      this.tenant = result;
-      this.cookieService.set("tenant",result,this.date,"/");
-      this.isSelectTenant = true;
-
+      if(result){
+        this.date = new Date();
+        this.date.setDate( this.date.getDate() + 999 );
+        this.tenant = result;
+        this.cookieService.set("tenant",result,this.date,"/");
+        this.isSelectTenantSubject.next(true)
+      }
     });
   }
 
@@ -79,10 +83,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   checkTenant(){
     this.tenant = this.cookieService.get("tenant");
+    console.log("Check Tenant", this.tenant);
     if(this.tenant){
-      this.isSelectTenant = true;
+      this.isSelectTenantSubject.next(true);
+      console.log("Check Tenant true");
     }else{
-      this.isSelectTenant = false;
+      this.isSelectTenantSubject.next(false);
     }
   }
 

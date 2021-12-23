@@ -8,9 +8,9 @@
 >
   <!--begin::Heading-->
   <div class="text-center mb-10">
-    <h1 class="text-dark mb-3">Sign In to Metronic</h1>
+    <h1 class="text-dark mb-3">Kullanıcı Girişi</h1>
     <div class="text-gray-400 fw-bold fs-4">
-      New Here?
+      Hesabınız yokmu?
       <a
         routerLink="/auth/registration"
         id="kt_login_signup"
@@ -24,11 +24,11 @@
   <!-- begin::Alert info-->
   <ng-container *ngIf="!hasError">
     <div class="mb-10 bg-light-info p-8 rounded">
-      <div *ngIf="!isSelectTenant" class="text-info">
+      <div *ngIf="!(isSelectTenant$ | async)" class="text-info">
         Giriş yapmadan önce şirket bilgilerinizi girmeniz,
         gerekmektedir. <strong (click)="openDialog()">Buraya</strong> tıklayarak şirket isminizi giriniz.
       </div>
-      <div *ngIf="isSelectTenant" class="text-info">
+      <div *ngIf="isSelectTenant$ | async" class="text-info">
         Selam, <span [innerHtml]="tenant"></span>.
         Farklı bir firma seçmek için<strong (click)="openDialog()"> buraya</strong> tıklayınız.
       </div>
@@ -107,7 +107,7 @@
           id="kt_login_forgot"
           [style.margin-left]="'5px'"
         >
-          Forgot Password ?
+          Şifremi Unuttum ?
         </a>
       </div>
     </div>
@@ -160,38 +160,16 @@
     >
       <ng-container *ngIf="isLoading$ | async">
         <span class="indicator-progress" [style.display]="'block'">
-          Please wait...
+          Oturum açılıyor...
           <span
             class="spinner-border spinner-border-sm align-middle ms-2"
           ></span>
         </span>
       </ng-container>
       <ng-container *ngIf="!(isLoading$ | async)">
-        <span class="indicator-label">Continue</span>
+        <span class="indicator-label">Devam et</span>
       </ng-container>
     </button>
-
-    <!-- begin::Separator  -->
-    <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
-    <!-- end::Separator  -->
-
-    <a
-      class="
-        btn btn-flex
-        flex-center
-        btn-light btn-lg
-        w-100
-        mb-5
-        cursor-pointer
-      "
-    >
-      <img
-        class="h-20px me-3"
-        src="./assets/media/svg/brand-logos/google-icon.svg"
-      />
-
-      Continue with Google
-    </a>
   </div>
   <!--end::Action-->
 </form>
