@@ -1,3 +1,5 @@
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { CategoryComponent } from './category/category.component';
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { ProductComponent } from './product/product.component';
 import { AddTableComponent } from './tables/add-table/add-table.component';
@@ -67,6 +69,14 @@ const Routing: Routes = [
   {
     path: "products/add",
     component: AddProductComponent
+  },
+  {
+    path: "products/category",
+    component: CategoryComponent
+  },
+  {
+    path: "products/category/add",
+    component: AddCategoryComponent
   }
 ];
 

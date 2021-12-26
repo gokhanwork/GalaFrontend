@@ -1,5 +1,5 @@
 export interface ProductModel{
-  productId:number
+  productId:string
   name:string
   code:string
   unitId:number

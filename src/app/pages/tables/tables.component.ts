@@ -29,39 +29,8 @@ export class TablesComponent implements OnInit {
     this.getTables();
   }
 
-  /*getTables(){
-    this.tableService.getTables().subscribe(response => {
-        this.tables = response.data;
-        console.log(response.data);
-        this.dataLoaded = true;
-
-    },
-    (responseError)=> {
-        this.toast.error(responseError.error.message,"Hata")
-        console.log(responseError);
-
-    })
-  }
-  /*async getTables() {
-    this.tableService.getTables().then((response) => {
-      this.tables = response.data;
-      this.dataLoaded = true;
-      console.log("Metot içi",this.dataLoaded);
-
-    });
-  }*/
-
-  /*getTables(){
-    this.subscription = timer(0, 10000).pipe(
-      switchMap(() => this.tableService.getTables())
-    ).subscribe((response) => {
-      this.tables = response.data;
-      console.log(this.tables);
-
-    });
-  }*/
   getTables(){
-    const loginSubscr = this.tableService
+    const tableSubcr = this.tableService
       .getTables()
       .pipe(first())
       .subscribe((response) => {
@@ -72,11 +41,7 @@ export class TablesComponent implements OnInit {
           console.log(response);
         }
       });
-    this.unsubscribe.push(loginSubscr);
-  }
-  log(text:TableModel[]){
-    console.log("DataLoaded",text);
-
+    this.unsubscribe.push(tableSubcr);
   }
 
 }
