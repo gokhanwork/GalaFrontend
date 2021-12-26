@@ -27,6 +27,7 @@ import { ProductComponent } from './pages/product/product.component';
 import { AddProductComponent } from './pages/product/add-product/add-product.component';
 import { DialogModule } from './_metronic/partials/content/dialog/dialog.module';
 import { CookieService } from 'ngx-cookie-service';
+import { CategoryComponent } from './pages/category/category.component';
 // #fake-end#
 const authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 function appInitializer(authService: AuthService) {
@@ -41,7 +42,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [AppComponent, TablesComponent, AddTableComponent, ProductComponent, AddProductComponent],
+  declarations: [AppComponent, TablesComponent, AddTableComponent, ProductComponent, AddProductComponent, CategoryComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
