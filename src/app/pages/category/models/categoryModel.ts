@@ -1,7 +1,8 @@
 export interface CategoryModel {
-  categoryId:string;
+  id:string;
   code:string
   name:string
   image:string
-  parentId:string
+  parentId:string,
+  parentCategoryName:string
 }

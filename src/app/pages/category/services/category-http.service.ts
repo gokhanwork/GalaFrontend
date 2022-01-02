@@ -1,3 +1,4 @@
+import { TableModel } from 'src/app/models/tableModel';
 import { CategoryModel } from './../models/categoryModel';
 import { Result } from './../../../models/Result';
 import { Observable } from 'rxjs';
@@ -16,5 +17,8 @@ export class CategoryHttpService {
 
   getCategories():Observable<Result<CategoryModel[]>>{
     return this.httpClient.get<Result<CategoryModel[]>>(`${API_USERS_URL}`);
+  }
+  addCategory(tableModel:TableModel):Observable<Result<CategoryModel>>{
+    return this.httpClient.post<Result<CategoryModel>>(`${API_USERS_URL}`,tableModel);
   }
 }

@@ -1,1 +1,115 @@
-<p>add-category works!</p>
+<ng-container *ngIf="isLoading$ | async">
+  <span class="indicator-progress" [style.display]="'block'">
+    Yükleniyor...
+    <span
+      class="spinner-border spinner-border-sm align-center ms-2"
+    ></span>
+  </span>
+</ng-container>
+<div class="card mb-5 mb-xl-10">
+  <div
+    class="card-header border-0 cursor-pointer"
+    role="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#kt_account_profile_details"
+    aria-expanded="true"
+    aria-controls="kt_account_profile_details"
+  >
+    <div class="card-title m-0">
+      <h3 class="fw-bolder m-0">Kategori Oluştur</h3>
+    </div>
+  </div>
+
+  <div id="kt_account_profile_details" class="collapse show">
+    <form [formGroup]="categoryAddForm" class="form">
+      <div class="card-body border-top p-9">
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">Kategori Resmi</label>
+          <div class="col-lg-8">
+            <div
+              class="image-input image-input-outline"
+              data-kt-image-input="true"
+              [style.background-image]="'url(./assets/media/avatars/blank.png'"
+            >
+              <div
+                class="image-input-wrapper w-125px h-125px"
+                [style.background-image]="
+                  'url(./assets/media/avatars/150-2.jpg'
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label required fw-bold fs-6"
+            >Kategori Adı</label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="
+                form-control form-control-lg form-control-solid
+                mb-3 mb-lg-0
+              "
+              placeholder="Kategori adını giriniz..."
+              formControlName="name"
+              id="name"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            >Kategori Kodu</label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="
+                form-control form-control-lg form-control-solid
+                mb-3 mb-lg-0
+              "
+              placeholder="Kategoriye kısa kod belirleyebilirsiniz..."
+              formControlName="code"
+              id="code"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            >Üst Kategori</label
+          >
+          <div class="col-lg-8 fv-row">
+            <select
+              name="parentId"
+              class="form-select form-select-lg form-select-solid"
+              formControlName="parentId"
+              [(ngModel)]="categories"
+            >
+              <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="isLoading"
+          (click)="addCategory()"
+        >
+        <ng-container *ngIf="isLoading$ | async">
+          <span class="indicator-progress" [style.display]="'block'">
+            Kategori ekleniyor...
+            <span
+              class="spinner-border spinner-border-sm align-middle ms-2"
+            ></span>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="!(isLoading$ | async)">
+          <span class="indicator-label">Kategori Ekle</span>
+        </ng-container>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

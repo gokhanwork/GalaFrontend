@@ -1,3 +1,5 @@
+import { ComponentsModule } from './core/shared/components/components.module';
+import { DropdownMenusModule } from './_metronic/partials/content/dropdown-menus/dropdown-menus.module';
 import { WidgetsModule } from './_metronic/partials/content/widgets/widgets.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { StroageTool } from './utilities/stroageTool';
@@ -29,6 +31,7 @@ import { DialogModule } from './_metronic/partials/content/dialog/dialog.module'
 import { CookieService } from 'ngx-cookie-service';
 import { CategoryComponent } from './pages/category/category.component';
 import { AddCategoryComponent } from './pages/category/add-category/add-category.component';
+import { DataPropertyGetterPipe } from './core/pipes/data-property-getter.pipe';
 // #fake-end#
 const authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 function appInitializer(authService: AuthService) {
@@ -53,7 +56,9 @@ export function tokenGetter() {
     HttpClientModule,
     ClipboardModule,
     WidgetsModule,
+    DropdownMenusModule,
     DialogModule,
+    ComponentsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),

@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TableHttpService } from '../services/table-http.service';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   templateUrl: './add-table.component.html',
   styleUrls: ['./add-table.component.scss']
 })
-export class AddTableComponent implements OnInit {
+export class AddTableComponent implements OnInit, OnDestroy {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoading: boolean;
   private unsubscribe: Subscription[] = [];
