@@ -1,13 +1,13 @@
-export interface ProductModel{
-  productId:string
+import { CategoryModel } from './../../category/models/categoryModel';
+import { Category } from './../../../models/category';
+export interface ProductModel {
+  id:string
   name:string
-  code:string
-  unitId:number
-  costPrice:number
-  price:number
-  image:string
+  description:string
+  rate:number
+  imagePath:string
   categoryId:number
   subCategoryId:number
-  quantity:number
-  alertQuantity:number
+  category:CategoryModel
+  subCategory:CategoryModel
 }

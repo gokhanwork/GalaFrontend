@@ -1,10 +1,13 @@
-<mat-card class="module-card" style="margin-bottom: 0px!important;padding-bottom: 4px!important;">
-  <mat-card-header>
-      <mat-card-title>
-          Başlık
-      </mat-card-title>
-      <mat-card-subtitle> Subtitle </mat-card-subtitle>
-  </mat-card-header>
+<div class="card shadow-sm">
+  <div class="card-header">
+      <h3 class="card-title">{{ title }}</h3>
+      <div class="card-toolbar">
+          <button type="button" class="btn btn-sm btn-light">
+              Action
+          </button>
+      </div>
+  </div>
+  <div class="card-body py-3">
   <div style="margin: 0 26px 0 16px">
       <div class="left">
           <a *ngIf="onCreateForm.observers.length>0" mat-raised-button color="primary" (click)="openCreateForm()">
@@ -28,7 +31,7 @@
   </div>
   <!-- Table -->
   <table fixedLayout="true" mat-table mat-table-stripped [dataSource]="tableDataSource" matSort
-      (matSortChange)="handleSort($event)">
+      (matSortChange)="handleSort($event)" class="table align-middle gs-0 gy-4">
       <ng-container *ngFor="let tableColumn of columns" [matColumnDef]="tableColumn.name">
           <!-- if showable column header -->
           <ng-container *ngIf="
@@ -91,18 +94,42 @@
                           (click)="openCustomActionOne(element)">
                           <mat-icon>{{customActionOneData.icon}}</mat-icon>
                       </button>
-                      <button *ngIf="onView.observers.length>0"  mat-raised-button color="primary"
-                          (click)="openViewForm(element)">
-                          <mat-icon>remove_red_eye</mat-icon>
-                      </button>
-                      <button *ngIf="onEditForm.observers.length>0" matTooltip="Edit" mat-raised-button color="accent"
-                          (click)="openEditForm(element)">
-                          <mat-icon>mode_edit</mat-icon>
-                      </button>
-                      <button *ngIf="onDelete.observers.length>0" matTooltip="Delete" mat-raised-button color="danger"
-                          (click)="openDeleteConfirmationDialog(element.id)">
-                          <mat-icon>delete</mat-icon>
-                      </button>
+                      <a
+                        *ngIf="onView.observers.length>0"
+                        (click)="openViewForm(element)"
+                        class="
+                          btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                          me-1
+                        "
+                      >
+                        <span
+                          [inlineSVG]="'./assets/media/icons/duotune/general/gen019.svg'"
+                          class="svg-icon svg-icon-3"
+                        ></span>
+                      </a>
+                      <a
+                      *ngIf="onEditForm.observers.length>0"
+                      (click)="openEditForm(element)"
+                      class="
+                        btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                        me-1
+                      "
+                    >
+                      <span
+                        [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                        class="svg-icon svg-icon-3"
+                      ></span>
+                    </a>
+                    <a
+                    *ngIf="onDelete.observers.length>0"
+                    (click)="openDeleteConfirmationDialog(element.id)"
+                    class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                  >
+                    <span
+                      [inlineSVG]="'./assets/media/icons/duotune/general/gen027.svg'"
+                      class="svg-icon svg-icon-3"
+                    ></span>
+                  </a>
                   </ng-container>
               </td>
           </ng-container>
@@ -119,4 +146,5 @@
   <mat-paginator *ngIf="totalCount > 0" [length]="totalCount" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
       (page)="onPageChange($event)" showFirstLastButtons>
   </mat-paginator>
-</mat-card>
+</div>
+</div>

@@ -6,38 +6,9 @@
     ></span>
   </span>
 </ng-container>
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
-  <thead>
-    <tr>
-      <th>Ürün ID</th>
-      <th>Stok Kodu</th>
-      <th>Ürün Adı</th>
-      <th>Fiyatı</th>
-      <th>Miktarı</th>
-      <th>
-        İşlem
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.productId }}</td>
-      <td>{{ product.code }}</td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
-      <td>{{ product.quantity }}</td>
-      <td>
-
-        <a href="" class="btn btn-sm btn-clean btn-icon" title="Görüntüle">
-        	<i class="la la-eye"></i>
-        </a>
-        <a href="" class="btn btn-sm btn-clean btn-icon" title="Düzenle">
-          <i class="la la-edit"></i>
-        </a>
-        <a href="" class="btn btn-sm btn-clean btn-icon" title="Sil">
-          <i class="la la-trash"></i>
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<app-table [title]="'Products'" [subtitle]="'Manage, Register, Update or Remove Products here.'"
+    [data]="products && products.data" [columns]="productColumns" (onFilter)="filter($event)"
+    (onReload)="reload()" (onCreateForm)="openForm()" (onEditForm)="openForm($event)" (onSort)="sort($event)"
+    (onDelete)="remove($event)" [totalCount]="products && products.totalCount"
+    [pageSize]="products && products.pageSize" (onPageChanged)="pageChanged($event)">
+  </app-table>

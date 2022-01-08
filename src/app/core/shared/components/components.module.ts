@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataPropertyGetterPipe } from '../../pipes/data-property-getter.pipe';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 
 
@@ -35,7 +36,8 @@ import { DataPropertyGetterPipe } from '../../pipes/data-property-getter.pipe';
     MatIconModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    InlineSVGModule,
   ],
   exports: [
     RouterModule,

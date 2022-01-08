@@ -5,6 +5,9 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListsComponent } from 'src/app/modules/widgets-examples/lists/lists.component';
 import { ProductHttpService } from './product-http.service';
+import { PaginatedResult } from 'src/app/models/PaginatedResult';
+import { ProductParams } from '../models/productParams';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +23,23 @@ export class ProductService implements OnDestroy {
     this.isLoading$ = this.isLoadingSubject.asObservable();
    }
 
-   getProducts():Observable<ListResponseModel<ProductModel>>{
+   getProducts(productParams: ProductParams):Observable<PaginatedResult<ProductModel>>{
      this.isLoadingSubject.next(true);
-     return this.productHttpService.getProducts().pipe(
-       map((data:ListResponseModel<ProductModel>) => {
+     let params = new HttpParams();
+    if (productParams.searchString) {
+      params = params.append('searchString', productParams.searchString);
+    }
+    if (productParams.pageNumber) {
+      params = params.append('pageNumber', productParams.pageNumber.toString());
+    }
+    if (productParams.pageSize) {
+      params = params.append('pageSize', productParams.pageSize.toString());
+    }
+    if (productParams.orderBy) {
+      params = params.append('orderBy', productParams.orderBy.toString());
+    }
+     return this.productHttpService.getProducts(params).pipe(
+       map((data: PaginatedResult<ProductModel>) => {
           return data;
        }),
        finalize(() => {

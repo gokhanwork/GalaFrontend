@@ -21,7 +21,7 @@ import { PaginatedFilter } from 'src/app/core/models/filters/PaginatedFilter';
 })
 export class TableComponent implements OnInit, AfterViewInit {
 
-  public tableDataSource = new MatTableDataSource([]);
+  public tableDataSource =  new MatTableDataSource<any[]>([]);
   public displayedColumns: string[];
   @Input() customActionOneData: CustomAction;
   @Input() customActionData: CustomAction;
@@ -39,6 +39,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   @Input() columns: TableColumn[];
 
   @Input() set data(data: any[]) {
+
     this.setTableDataSource(data);
   }
 
@@ -59,6 +60,8 @@ export class TableComponent implements OnInit, AfterViewInit {
       (tableColumn: TableColumn) => tableColumn.name
     );
     this.displayedColumns = columnNames;
+    console.log("Names", this.columns);
+
   }
 
   ngAfterViewInit(): void {
@@ -66,7 +69,9 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   setTableDataSource(data: any) {
-    this.tableDataSource = new MatTableDataSource<never>(data);
+    this.tableDataSource = new MatTableDataSource<any>(data);
+    console.log("Source", this.tableDataSource);
+
   }
   openCustomActionOne($event: any) {
     this.onCustomActionOne.emit($event);
@@ -99,6 +104,8 @@ export class TableComponent implements OnInit, AfterViewInit {
   handleSort(sortParams: Sort) {
     sortParams.active = this.columns.find((column) => column.name === sortParams.active
     )?.dataKey || "";
+    console.log("Datakey",sortParams.active);
+
     if (sortParams.direction == "")
     {
       sortParams.direction = "asc";
