@@ -68,6 +68,7 @@ export class ProductComponent implements OnInit {
     this.getProducts();
   }
   openForm(product?: ProductModel): void {
+    this.router.navigate(["/add"]);
   }
 
   remove($event: string): void {
@@ -75,7 +76,7 @@ export class ProductComponent implements OnInit {
 
   sort($event: Sort): void {
     this.productParams.orderBy = $event.active + ' ' + $event.direction;
-    console.log(this.productParams.orderBy);
+    console.log("Sort",this.productParams.orderBy);
     this.getProducts();
   }
 

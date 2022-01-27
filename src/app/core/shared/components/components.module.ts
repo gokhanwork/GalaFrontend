@@ -1,3 +1,4 @@
+import { UnitTypeComponent } from './unit-type/unit-type.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './table/table.component';
@@ -12,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControlName, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataPropertyGetterPipe } from '../../pipes/data-property-getter.pipe';
 import { InlineSVGModule } from 'ng-inline-svg';
@@ -22,7 +23,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
 @NgModule({
   declarations: [
     TableComponent,
-    DataPropertyGetterPipe
+    DataPropertyGetterPipe,
+    UnitTypeComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
     MatIconModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    UnitTypeComponent
   ],
 })
 export class ComponentsModule { }

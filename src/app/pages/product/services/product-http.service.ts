@@ -3,8 +3,8 @@ import { ListResponseModel } from './../../../models/listResponseModel';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { PaginatedResult } from 'src/app/models/PaginatedResult';
+import { environment } from 'src/environments/environment';
 
 const API_USERS_URL = `${environment.apiUrl}v1/products`;
 
