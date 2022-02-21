@@ -1,4 +1,4 @@
-import { Result } from './../../../models/Result';
+import { Result } from '../../../core/models/result/Result';
 import { ResponseModel } from '../../../models/responseModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';

@@ -1,4 +1,4 @@
-import { Result } from './../../models/Result';
+import { Result } from '../../core/models/result/Result';
 import { TableHttpService } from './services/table-http.service';
 import { Component, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { Toast } from 'bootstrap';

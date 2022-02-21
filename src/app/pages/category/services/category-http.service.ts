@@ -1,6 +1,6 @@
 import { TableModel } from 'src/app/models/tableModel';
 import { CategoryModel } from './../models/categoryModel';
-import { Result } from './../../../models/Result';
+import { Result } from '../../../core/models/result/Result';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

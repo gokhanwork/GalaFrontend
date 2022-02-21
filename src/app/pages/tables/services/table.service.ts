@@ -1,4 +1,4 @@
-import { Result } from './../../../models/Result';
+import { Result } from '../../../core/models/result/Result';
 import { ListResponseModel } from 'src/app/models/listResponseModel';
 import { TableModel } from 'src/app/models/tableModel';
 import { TableHttpService } from './table-http.service';

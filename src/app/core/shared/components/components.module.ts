@@ -17,6 +17,7 @@ import { FormControlName, FormsModule, ReactiveFormsModule } from '@angular/form
 import { RouterModule } from '@angular/router';
 import { DataPropertyGetterPipe } from '../../pipes/data-property-getter.pipe';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { BrandSelectComponent } from './brand-select/brand-select.component';
 
 
 
@@ -24,7 +25,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
   declarations: [
     TableComponent,
     DataPropertyGetterPipe,
-    UnitTypeComponent
+    UnitTypeComponent,
+    BrandSelectComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    UnitTypeComponent
+    UnitTypeComponent,
+    BrandSelectComponent
   ],
 })
 export class ComponentsModule { }

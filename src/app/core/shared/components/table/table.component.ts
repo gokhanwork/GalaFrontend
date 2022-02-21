@@ -60,8 +60,6 @@ export class TableComponent implements OnInit, AfterViewInit {
       (tableColumn: TableColumn) => tableColumn.name
     );
     this.displayedColumns = columnNames;
-    console.log("Names", this.columns);
-
   }
 
   ngAfterViewInit(): void {
@@ -70,7 +68,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   setTableDataSource(data: any) {
     this.tableDataSource = new MatTableDataSource<any>(data);
-    console.log("Source", this.tableDataSource);
 
   }
   openCustomActionOne($event: any) {

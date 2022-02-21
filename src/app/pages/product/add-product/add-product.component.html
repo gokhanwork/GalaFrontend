@@ -6,14 +6,13 @@
     aria-expanded="true"
     aria-controls="fh_product_add">
     <div class="card-title m-0">
-      <h3 class="fw-bolder m-0">Ürün Ekle</h3>
+      <h3 class="fw-bolder m-0">Ürün Bilgileri</h3>
     </div>
   </div>
   <div id="fh_product_add" class="collapse show">
-    <form class="form">
+    <form [formGroup]="productAddForm" class="form">
       <div class="card-body border-top p-9">
         <div class="row mb-6">
-
           <div class="col-lg-4 fv-row">
             <label class="col-lg-4 form-label required fw-bold fs-6"
             >Ürün Adı</label>
@@ -22,6 +21,7 @@
               class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
               placeholder="Ürün Adı..."
               id="name"
+              formControlName="name"
             />
           </div>
           <div class="col-lg-4 fv-row">
@@ -32,13 +32,115 @@
               class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
               placeholder="Stok kodu..."
               id="code"
+              formControlName="code"
             />
           </div>
           <div class="col-lg-4 fv-row">
             <label class="col-lg-4 form-label required fw-bold fs-6">Miktar Birimi</label>
-            <app-unit-type></app-unit-type>
+            <app-unit-type [name]="'unitId'" [formGroup]="productAddForm" controlName="unitId"></app-unit-type>
           </div>
         </div>
+        <div class="row mb-6">
+          <div class="col-lg-3 fv-row">
+            <label class="col-lg-4 form-label fw-bold fs-6"
+            >Maliyet Fiyatı</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-3"
+              placeholder="Maliyet fiyatı..."
+              id="costPrice"
+              formControlName="costPrice"
+            />
+          </div>
+          <div class="col-lg-3 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6"
+            >Fiyatı</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-3"
+              placeholder="Fiyatı..."
+              id="price"
+              formControlName="price"
+            />
+          </div>
+          <div class="col-lg-3 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6">Stok Adedi</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-3"
+              placeholder="Stok Adeti..."
+              id="quantity"
+              formControlName="quantity"
+            />
+          </div>
+          <div class="col-lg-3 fv-row">
+            <label class="col-lg-4 form-label fw-bold fs-6">Stok Alarmı</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-3"
+              placeholder="Bu miktarın altında uyar"
+              id="alertQuantity"
+              formControlName="alertQuantity"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <div class="col-lg-4 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6"
+            >Marka</label>
+            <app-brand-select [name]="'brandId'" [formGroup]="productAddForm" controlName="brandId"></app-brand-select>
+          </div>
+          <div class="col-lg-4 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6"
+            >Kategori</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
+              placeholder="Kategori Seçiniz..."
+              id="categoryId"
+              formControlName="categoryId"
+            />
+          </div>
+          <div class="col-lg-4 fv-row">
+            <label class="col-lg-4 form-label required fw-bold fs-6">Alt Kategori</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
+              placeholder="Stok kodu..."
+              id="subCategoryId"
+              formControlName="subCategoryId"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <div class="col-lg-12 fv-row">
+            <label class="col-lg-12 form-label fw-bold fs-6">Ürün Açıklaması</label>
+            <textarea
+            class="form-control form-control-lg form-control-solid mb-3 mb-lg-12"
+            placeholder="Açıkama..."
+            id="description"
+            formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addProduct()"
+        >
+        <ng-container *ngIf="isLoading$ | async">
+          <span class="indicator-progress" [style.display]="'block'">
+            Masa ekleniyor...
+            <span
+              class="spinner-border spinner-border-sm align-middle ms-2"
+            ></span>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="!(isLoading$ | async)">
+          <span class="indicator-label">Masa Ekle</span>
+        </ng-container>
+        </button>
       </div>
     </form>
   </div>

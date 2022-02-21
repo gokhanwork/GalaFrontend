@@ -5,9 +5,9 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListsComponent } from 'src/app/modules/widgets-examples/lists/lists.component';
 import { ProductHttpService } from './product-http.service';
-import { PaginatedResult } from 'src/app/models/PaginatedResult';
 import { ProductParams } from '../models/productParams';
 import { HttpParams } from '@angular/common/http';
+import { PaginatedResult } from 'src/app/core/models/result/PaginatedResult';
 
 @Injectable({
   providedIn: 'root'

@@ -5,11 +5,11 @@ import { Component, OnInit, Renderer2, AfterViewInit, OnDestroy } from '@angular
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { PaginatedResult } from 'src/app/models/PaginatedResult';
 import { TableColumn } from 'src/app/core/shared/components/table/table-column';
 import { ProductParams } from './models/productParams';
 import { PaginatedFilter } from 'src/app/core/models/filters/PaginatedFilter';
 import { Sort } from '@angular/material/sort';
+import { PaginatedResult } from 'src/app/core/models/result/PaginatedResult';
 
 @Component({
   selector: 'app-product',

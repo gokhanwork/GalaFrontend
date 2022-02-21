@@ -1,5 +1,5 @@
 import { TokenModel } from './../../../models/tokenModel';
-import { Result } from './../../../models/Result';
+import { Result } from '../../../core/models/result/Result';
 import { ListResponseModel } from './../../../models/listResponseModel';
 import { LoginModel } from './../models/login.model';
 import { Injectable, OnDestroy } from '@angular/core';

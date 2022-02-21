@@ -3,7 +3,7 @@ import { CategoryHttpService } from './category-http.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { CategoryModel } from '../models/categoryModel';
-import { Result } from 'src/app/models/Result';
+import { Result } from 'src/app/core/models/result/Result';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,11 @@
 import { GeneralHttpService } from './http/general-http.service';
 import { UnitTypeModel } from './../models/general/unitTypeModel';
-import { Result } from './../../models/Result';
+import { Result } from '../models/result/Result';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Injectable, OnDestroy } from '@angular/core';
 import { ThisReceiver } from '@angular/compiler';
 import { map, finalize } from 'rxjs/operators';
+import { BrandModel } from '../models/general/brandModel';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,15 @@ export class GeneralService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.generalHttpService.getUnitTypes().pipe(
       map((data: Result<UnitTypeModel[]>) => {
+        return data;
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  getBrands(): Observable<Result<BrandModel[]>>{
+    this.isLoadingSubject.next(true);
+    return this.generalHttpService.getBrands().pipe(
+      map((data: Result<BrandModel[]>) => {
         return data;
       }),
       finalize(() => this.isLoadingSubject.next(false))

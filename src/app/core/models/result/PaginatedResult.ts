@@ -1,4 +1,5 @@
 import { IResult } from "./IResult";
+
 export class PaginatedResult<T> implements IResult<T>
 {
     succeeded: boolean;

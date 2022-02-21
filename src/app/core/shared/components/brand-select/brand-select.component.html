@@ -9,10 +9,10 @@
 <select
               name="{{ name }}"
               class="form-select form-select-lg form-select-solid"
-              [formControl]="control"
+              [formControl]="formControl"
             >
               <option
-               *ngFor="let unitType of unitTypes"
-               value="{{ unitType.id }}">{{ unitType.name }}</option>
+               *ngFor="let brand of brands"
+               value="{{ brand.id }}">{{ brand.name }}</option>
             </select>
 
