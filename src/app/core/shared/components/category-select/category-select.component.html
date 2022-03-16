@@ -1,0 +1,33 @@
+<ng-container *ngIf="isLoading$ | async">
+  <span class="indicator-progress" [style.display]="'block'">
+    Yükleniyorr...
+    <span
+      class="spinner-border spinner-border-sm align-center ms-2"
+    ></span>
+  </span>
+</ng-container>
+  <label class="col-lg-4 form-label required fw-bold fs-6">Kategori</label>
+  <select
+              #selectCategory
+              name="{{ categorySelectName }}"
+              class="form-select form-select-lg form-select-solid"
+              [formControl]="categoryFormControl"
+              (change)="onChange(selectCategory.value)"
+            >
+              <option
+               *ngFor="let category of categories"
+               [value]="category.id">{{ category.name }}</option>
+            </select>
+  <select
+              name="{{ subCategorySelectName }}"
+              class="form-select form-select-lg form-select-solid"
+              [formControl]="subCategoryFormControl"
+              [ngModel]="selectedCategories"
+              *ngIf="selectedCategories.length > 0"
+            >
+              <option
+               *ngFor="let category of selectedCategories"
+               value="{{ category.id }}">{{ category.name }}</option>
+            </select>
+
+

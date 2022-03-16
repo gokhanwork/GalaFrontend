@@ -15,7 +15,8 @@
         <div class="row mb-6">
           <div class="col-lg-4 fv-row">
             <label class="col-lg-4 form-label required fw-bold fs-6"
-            >Ürün Adı</label>
+            [translate]="'PRODUCT.ADD.PRODUCT_NAME'"
+            ></label>
             <input
               type="text"
               class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
@@ -91,27 +92,13 @@
             <app-brand-select [name]="'brandId'" [formGroup]="productAddForm" controlName="brandId"></app-brand-select>
           </div>
           <div class="col-lg-4 fv-row">
-            <label class="col-lg-4 form-label required fw-bold fs-6"
-            >Kategori</label>
-            <input
-              type="text"
-              class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
-              placeholder="Kategori Seçiniz..."
-              id="categoryId"
-              formControlName="categoryId"
-            />
-          </div>
-          <div class="col-lg-4 fv-row">
-            <label class="col-lg-4 form-label required fw-bold fs-6">Alt Kategori</label>
-            <input
-              type="text"
-              class="form-control form-control-lg form-control-solid mb-3 mb-lg-4"
-              placeholder="Stok kodu..."
-              id="subCategoryId"
-              formControlName="subCategoryId"
-            />
-          </div>
+          <app-category-select [divClass]="'col-lg-4 fv-row'"
+           [categorySelectName]="'categoryId'" [categoryControlName]="'categoryId'"
+           [subCategorySelectName]="'subCategoryId'" [subCategoryControlName]="'subCategoryId'"></app-category-select>
         </div>
+        </div>
+
+
         <div class="row mb-6">
           <div class="col-lg-12 fv-row">
             <label class="col-lg-12 form-label fw-bold fs-6">Ürün Açıklaması</label>

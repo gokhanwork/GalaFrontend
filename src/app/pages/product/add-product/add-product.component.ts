@@ -1,14 +1,17 @@
+import { TranslateService } from '@ngx-translate/core';
+import { CategorySelectComponent } from './../../../core/shared/components/category-select/category-select.component';
 import { ToastrService } from 'ngx-toastr';
 import { ProductHttpService } from './../services/product-http.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  styleUrls: ['./add-product.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddProductComponent implements OnInit, OnDestroy {
   productAddForm: FormGroup;
@@ -17,7 +20,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private unsubcsription: Subscription[]= [];
   constructor(private formBuilder:FormBuilder,
               private productHttpService:ProductHttpService,
-              private toastr:ToastrService) {
+              private toastr:ToastrService,
+              private translate:TranslateService) {
     const loadingSubscr = this.isLoading$
       .asObservable()
       .subscribe((res) => (this.isLoading = res));

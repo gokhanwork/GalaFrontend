@@ -100,6 +100,11 @@ export const locale = {
           ADD_MESSAGE: 'Customer has been created'
         }
       }
+    },
+    PRODUCT: {
+      ADD: {
+        PRODUCT_NAME: 'Ürün adı'
+      }
     }
   }
 };

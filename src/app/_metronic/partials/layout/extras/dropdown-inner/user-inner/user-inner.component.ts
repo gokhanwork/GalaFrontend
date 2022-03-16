@@ -70,6 +70,11 @@ const languages = [
     flag: './assets/media/flags/united-states.svg',
   },
   {
+    lang: 'tr',
+    name: 'Türkçe',
+    flag: './assets/media/flags/turkey.svg'
+  },
+  {
     lang: 'zh',
     name: 'Mandarin',
     flag: './assets/media/flags/china.svg',

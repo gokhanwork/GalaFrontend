@@ -7,6 +7,7 @@ import {locale as esLang} from './modules/i18n/vocabs/es';
 import {locale as jpLang} from './modules/i18n/vocabs/jp';
 import {locale as deLang} from './modules/i18n/vocabs/de';
 import {locale as frLang} from './modules/i18n/vocabs/fr';
+import {locale as trLang} from './modules/i18n/vocabs/tr';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
       esLang,
       jpLang,
       deLang,
-      frLang
+      frLang,
+      trLang
     );
   }
 

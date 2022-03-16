@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { DataPropertyGetterPipe } from '../../pipes/data-property-getter.pipe';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { BrandSelectComponent } from './brand-select/brand-select.component';
+import { CategorySelectComponent } from './category-select/category-select.component';
 
 
 
@@ -26,7 +27,8 @@ import { BrandSelectComponent } from './brand-select/brand-select.component';
     TableComponent,
     DataPropertyGetterPipe,
     UnitTypeComponent,
-    BrandSelectComponent
+    BrandSelectComponent,
+    CategorySelectComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { BrandSelectComponent } from './brand-select/brand-select.component';
     MatSortModule,
     MatPaginatorModule,
     UnitTypeComponent,
-    BrandSelectComponent
+    BrandSelectComponent,
+    CategorySelectComponent
   ],
 })
 export class ComponentsModule { }

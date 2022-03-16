@@ -5,6 +5,7 @@ import { UnitTypeModel } from './../../models/general/unitTypeModel';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { CategorySelectDto } from '../../models/general/categorySelectDto';
 const API_URL = `${environment.apiUrl}v1`;
 
 @Injectable({
@@ -24,4 +25,9 @@ export class GeneralHttpService {
     return this.httpClient.get<Result<BrandModel[]>>(API_URL + "/brands");
   }
   // Brand:::end
+  // Category:::start
+  getCategories(): Observable<Result<CategorySelectDto[]>>{
+    return this.httpClient.get<Result<CategorySelectDto[]>>(API_URL + "/category/get-all");
+  }
+  // Category:::end
 }
