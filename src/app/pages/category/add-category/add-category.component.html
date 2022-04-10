@@ -80,12 +80,15 @@
           >
           <div class="col-lg-8 fv-row">
             <select
-              name="parentId"
+              name="parentCategoryId"
               class="form-select form-select-lg form-select-solid"
-              formControlName="parentId"
+              formControlName="parentCategoryId"
               [(ngModel)]="categories"
             >
-              <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+              <option
+               *ngFor="let category of categories"
+              [selected]="category === ngDropdown"
+                [ngValue]="category.id">{{ category.name }}</option>
             </select>
           </div>
         </div>

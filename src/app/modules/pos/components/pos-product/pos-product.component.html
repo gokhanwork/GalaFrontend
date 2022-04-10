@@ -1,0 +1,30 @@
+<ng-container *ngIf="isLoading$ | async">
+  <span class="indicator-progress" [style.display]="'block'">
+    Yükleniyorr...
+    <span
+      class="spinner-border spinner-border-sm align-center ms-2"
+    ></span>
+  </span>
+</ng-container>
+<ng-container *ngIf="isShowProduct == false">
+<div class="row">
+  <div class="col-md-3"
+  *ngFor="let category of mainCategories">
+  <a
+    class="btn btn-primary"
+    (click)="categoryChange(category.id)">
+    {{category.name}}</a>
+</div>
+</div>
+</ng-container>
+<ng-container *ngIf="isShowProduct == true">
+  <div class="row">
+    <div class="col-md-3"
+    *ngFor="let product of productsByCategory">
+    <a
+      class="btn btn-primary"
+      (click)="categoryChange(product.id)">
+      {{product.name}}</a>
+  </div>
+  </div>
+</ng-container>

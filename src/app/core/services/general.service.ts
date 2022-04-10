@@ -6,7 +6,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { ThisReceiver } from '@angular/compiler';
 import { map, finalize } from 'rxjs/operators';
 import { BrandModel } from '../models/general/brandModel';
-import { CategorySelectDto } from '../models/general/categorySelectDto';
+import { CategorySelectDTO } from '../models/general/categorySelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +39,10 @@ export class GeneralService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-  getCategories(): Observable<Result<CategorySelectDto[]>>{
+  getCategories(): Observable<Result<CategorySelectDTO[]>>{
     this.isLoadingSubject.next(true);
     return this.generalHttpService.getCategories().pipe(
-      map((data: Result<CategorySelectDto[]>) => {
+      map((data: Result<CategorySelectDTO[]>) => {
         return data;
       }),
       finalize(() => this.isLoadingSubject.next(false))

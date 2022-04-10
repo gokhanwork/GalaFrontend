@@ -17,7 +17,16 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   private unsubscribe: Subscription[] = [];
   categoryAddForm: FormGroup;
-  categories:CategoryModel[];
+  categories:CategoryModel[] = [{
+    name: "Seçiniz ...",
+    parentCategoryId: "00000000-0000-0000-0000-000000000000",
+   id: "00000000-0000-0000-0000-000000000000",
+   code:"",
+   image:"",
+   parentCategoryName:""
+  }];
+  ngDropdown = this.categories[0];
+
   constructor(private formBuilder:FormBuilder,
     private categoryHttpService:CategoryHttpService,
     private toastr:ToastrService,
@@ -32,25 +41,32 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getCategories();
+
     this.createCategoryAddForm();
+    this.getCategories();
   }
   createCategoryAddForm(){
     this.categoryAddForm = this.formBuilder.group({
       code: [''],
       name: ['', Validators.required],
-      parentId: ['00000000-0000-0000-0000-000000000000']
+      parentCategoryId: ['00000000-0000-0000-0000-000000000000']
     });
   }
   addCategory(){
     this.isLoading$.next(true);
     if(this.categoryAddForm.valid){
       let categoryModel = Object.assign({}, this.categoryAddForm.value);
+      if(categoryModel.parentCategoryId.length > 1)
+      {
+        categoryModel.parentCategoryId = '00000000-0000-0000-0000-000000000000';
+      }
       console.log("Kategori Model", categoryModel);
 
       this.categoryHttpService.addCategory(categoryModel).subscribe((response) => {
         this.isLoading$.next(false);
         this.toastr.success(response.messages[0],"Başarılı")
+        this.getCategories();
+
       },
       (responseError) =>{
           this.isLoading$.next(false);
@@ -70,7 +86,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     const categorySubscr = this.categoryService.getCategories()
     .subscribe((response) => {
       if(response.succeeded){
-        this.categories = response.data;
+        this.categories = response.data.filter(c => c.parentCategoryId == '00000000-0000-0000-0000-000000000000');
         this.isLoading$.next(false);
         console.log("Kategori Response", this.categories);
       }

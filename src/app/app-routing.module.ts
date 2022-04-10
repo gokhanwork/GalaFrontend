@@ -10,6 +10,11 @@ export const routes: Routes = [
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path:'tools',
+    loadChildren: () =>
+      import('./modules/pos/pos.module').then((m) => m.PosModule),
+  },
+  {
     path: 'error',
     loadChildren: () =>
       import('./modules/errors/errors.module').then((m) => m.ErrorsModule),

@@ -3,6 +3,6 @@ export interface CategoryModel {
   code:string
   name:string
   image:string
-  parentId:string,
+  parentCategoryId:string,
   parentCategoryName:string
 }

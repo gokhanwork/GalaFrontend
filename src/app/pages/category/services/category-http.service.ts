@@ -16,9 +16,9 @@ export class CategoryHttpService {
   constructor(private httpClient:HttpClient) { }
 
   getCategories():Observable<Result<CategoryModel[]>>{
-    return this.httpClient.get<Result<CategoryModel[]>>(`${API_USERS_URL}`);
+    return this.httpClient.get<Result<CategoryModel[]>>(`${API_USERS_URL}/get-all`);
   }
-  addCategory(tableModel:TableModel):Observable<Result<CategoryModel>>{
-    return this.httpClient.post<Result<CategoryModel>>(`${API_USERS_URL}`,tableModel);
+  addCategory(categoryModel:CategoryModel):Observable<Result<CategoryModel>>{
+    return this.httpClient.post<Result<CategoryModel>>(`${API_USERS_URL}`,categoryModel);
   }
 }

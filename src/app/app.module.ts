@@ -32,6 +32,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CategoryComponent } from './pages/category/category.component';
 import { AddCategoryComponent } from './pages/category/add-category/add-category.component';
 import { DataPropertyGetterPipe } from './core/pipes/data-property-getter.pipe';
+import { PosComponent } from './modules/pos/pos.component';
 // #fake-end#
 const authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 function appInitializer(authService: AuthService) {

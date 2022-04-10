@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategorySelectDto } from 'src/app/core/models/general/categorySelectDto';
+import { CategorySelectDTO } from 'src/app/core/models/general/categorySelectDTO';
 
 @Component({
   selector: 'app-category-select',
@@ -14,8 +14,8 @@ import { CategorySelectDto } from 'src/app/core/models/general/categorySelectDto
 })
 export class CategorySelectComponent implements OnInit, OnDestroy {
 
-  categories:CategorySelectDto[];
-  selectedCategories:CategorySelectDto[] = [];
+  categories:CategorySelectDTO[];
+  selectedCategories:CategorySelectDTO[] = [];
   form:FormGroup;
   categoryFormControl:FormControl;
   subCategoryFormControl:FormControl;
