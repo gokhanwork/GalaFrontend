@@ -52,15 +52,14 @@ export class AuthService implements OnDestroy {
   }
 
   // public methods
-  login(loginModel:LoginModel):Observable<Result<UserType>> {
+  login(loginModel:LoginModel):Observable<UserType> {
     //loginModel.tenant="GokhanWork";
     this.isLoadingSubject.next(true);
     return this.authHttpService.login(loginModel)
     .pipe(
-      map((result: Result<TokenModel>) => {
-        if(result?.succeeded === true){
-          this.setAuthFromLocalStorage(result.data);
-        }
+      map((result: TokenModel) => {
+        debugger;
+          this.setAuthFromLocalStorage(result);
         return result;
       }),
       switchMap(() => this.getUserByToken()),
@@ -79,7 +78,7 @@ export class AuthService implements OnDestroy {
     });
   }
 
-  getUserByToken(): Observable<Result<UserType>> {
+  getUserByToken(): Observable<UserType> {
     const auth = this.getAuthFromLocalStorage();
     if (!auth || !auth.token) {
       return of(undefined!);
@@ -87,9 +86,9 @@ export class AuthService implements OnDestroy {
 
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.token).pipe(
-      map((user: Result<UserModel>) => {
+      map((user: UserModel) => {
         if (user) {
-          this.currentUserSubject.next(user.data);
+          this.currentUserSubject.next(user);
         } else {
           this.logout();
         }

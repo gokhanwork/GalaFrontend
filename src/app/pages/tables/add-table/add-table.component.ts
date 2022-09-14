@@ -28,8 +28,8 @@ export class AddTableComponent implements OnInit, OnDestroy {
 
   createTableAddForm(){
     this.tableAddForm = this.formBuilder.group({
-      tableName: ['', Validators.required],
-      tableStatus: [false, Validators.required]
+      Name: ['', Validators.required],
+      // Status: [false, Validators.required]
     });
   }
   addTable(){
@@ -39,19 +39,15 @@ export class AddTableComponent implements OnInit, OnDestroy {
       let tableModel = Object.assign({}, this.tableAddForm.value);
       this.tableService.addTable(tableModel).subscribe(
         (response) => {
+          debugger;
           this.isLoading$.next(false)
-          this.toastrService.success(response.messages[0],"Başarılı")
+          this.toastrService.success("Başarılı")
 
         },
         (responseError) => {
-          /*if(responseError.error.Errors.lenght > 0){
-            for (let i = 0; i < responseError.error.Errors.length; i++) {
-              this.toastrService.error(responseError.error.Errors[i].ErrorMessage, 'Hata');
-              console.log(responseError);
-            }
-          }*/
+          debugger;
           this.isLoading$.next(false);
-          console.log(responseError.error.exception);
+          console.log(responseError);
 
           this.toastrService.error(responseError.error.exception,"Hata");
         }

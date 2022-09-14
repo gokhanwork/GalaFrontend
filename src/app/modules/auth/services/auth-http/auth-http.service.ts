@@ -32,6 +32,7 @@ export class AuthHTTPService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
+    debugger;
     return this.http.post(`${API_USERS_URL}tokens`, loginModel,requestOptions);
   }
 
@@ -47,7 +48,7 @@ export class AuthHTTPService {
     });
   }
 
-  getUserByToken(token: string): Observable<Result<UserModel>> {
-    return this.http.get<Result<UserModel>>(`${environment.apiUrl}identity/profile`);
+  getUserByToken(token: string): Observable<UserModel> {
+    return this.http.get<UserModel>(`${environment.apiUrl}personal/profile`);
   }
 }

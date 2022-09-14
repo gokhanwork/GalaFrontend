@@ -1,5 +1,5 @@
 export interface TableModel {
   tableId: string;
-  tableName: number;
-  tableStatus: boolean;
+  Name: string;
+  Status: boolean;
 }

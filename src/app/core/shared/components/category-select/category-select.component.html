@@ -15,7 +15,7 @@
               (change)="onChange(selectCategory.value)"
             >
               <option
-               *ngFor="let category of categories"
+               *ngFor="let category of responseCategories"
                [value]="category.id">{{ category.name }}</option>
             </select>
   <select

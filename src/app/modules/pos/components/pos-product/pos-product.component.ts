@@ -19,6 +19,7 @@ export class PosProductComponent implements OnInit {
   productsByCategory:ProductDTO[];
   isLoading$:Observable<boolean>;
   isShowProduct:boolean = false;
+  catParam:string[] = [];
   private unSubscription: Subscription[] = [];
   constructor(private generalService:GeneralService,
               private posService:PosService) {
@@ -52,11 +53,16 @@ export class PosProductComponent implements OnInit {
         this.unSubscription.push(productSubs);
   }
   categoryChange(parentCatId:string){
+
+    this.catParam.push(parentCatId);
+
+
     if(this.childCategories.filter(c => c.parentCategoryId==parentCatId).length>0) {
+      this.isShowProduct = false;
       this.mainCategories = this.childCategories.filter(c => c.parentCategoryId==parentCatId);
     }else{
       this.isShowProduct = true;
-      console.log("Gelen Id ", parentCatId , " :: ");
+      console.log("Gelen Id ", this.catParam);
 
       this.productsByCategory = this.products.filter(p => p.categoryId == parentCatId || p.subCategoryId == parentCatId);
 

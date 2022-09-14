@@ -56,7 +56,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     this.isLoading$.next(true);
     if(this.categoryAddForm.valid){
       let categoryModel = Object.assign({}, this.categoryAddForm.value);
-      if(categoryModel.parentCategoryId.length > 1)
+      if(categoryModel.parentCategoryId.length < 1)
       {
         categoryModel.parentCategoryId = '00000000-0000-0000-0000-000000000000';
       }

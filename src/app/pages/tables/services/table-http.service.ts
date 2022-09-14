@@ -8,7 +8,7 @@ import { TableModel } from '../../../models/tableModel';
 import { ListResponseModel } from '../../../models/listResponseModel';
 
 
-const API_USERS_URL = `${environment.apiUrl}v1/tables`;
+const API_USERS_URL = `${environment.apiUrl}v1/table`;
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,10 @@ export class TableHttpService {
 
   constructor(private httpClient:HttpClient) { }
 
-  addTable(table:TableModel):Observable<Result<TableModel>>{
-    return this.httpClient.post<Result<TableModel>>(`${API_USERS_URL}`,table);
+  addTable(table:TableModel){
+    debugger;
+    var data = this.httpClient.post<Result<TableModel>>(`${API_USERS_URL}`,table)
+    return data;
   }
   getTables():Observable<Result<TableModel[]>>{
     return this.httpClient.get<Result<TableModel[]>>(`${API_USERS_URL}`);

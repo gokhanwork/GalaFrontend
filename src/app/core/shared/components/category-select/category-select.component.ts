@@ -1,3 +1,4 @@
+import { Category } from './../../../../models/category';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormControl, FormGroup, ControlContainer } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -15,6 +16,7 @@ import { CategorySelectDTO } from 'src/app/core/models/general/categorySelectDTO
 export class CategorySelectComponent implements OnInit, OnDestroy {
 
   categories:CategorySelectDTO[];
+  responseCategories:CategorySelectDTO[];
   selectedCategories:CategorySelectDTO[] = [];
   form:FormGroup;
   categoryFormControl:FormControl;
@@ -49,6 +51,10 @@ export class CategorySelectComponent implements OnInit, OnDestroy {
           .subscribe((response) => {
             if(response.succeeded){
                 this.categories = response.data;
+                this.responseCategories = response.data.filter(
+                  c => c.parentCategoryId == "00000000-0000-0000-0000-000000000000"
+                )
+
             }
           });
           this.unSubscription.push(categoriesSubs);

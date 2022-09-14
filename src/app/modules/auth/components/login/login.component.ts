@@ -119,10 +119,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     let loginModel:LoginModel = Object.assign({}, this.loginForm.value);
     const loginSubscr = this.authService
       .login(loginModel)
-      .pipe(filter(result => result?.succeeded === true))
+      .pipe()
       .subscribe((response) => {
         if (response) {
-          console.log(response)
+          console.log("Result "+response)
           this.router.navigate([this.returnUrl]);
         } else {
           this.hasError = true;
